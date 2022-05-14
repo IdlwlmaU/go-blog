@@ -2,39 +2,21 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-blog/models"
-	"go-blog/settings"
+	"go-blog/logic"
 	"net/http"
+	"strconv"
 )
 
 func IndexHandler(c *gin.Context) {
-	var categorys = []models.Category{
-		{
-			Cid:  1,
-			Name: "go",
-		},
+	// 1.获取参数并进行参数校验
+	pageStr := c.Query("page")
+	page, err := strconv.Atoi(pageStr)
+	if err != nil {
+		page = 1
 	}
-	var posts = []models.PostMore{
-		{
-			Pid:          1,
-			Title:        "go博客",
-			Content:      "内容",
-			UserName:     "dema",
-			ViewCount:    10086,
-			CreateAt:     "2022-05-14",
-			CategoryId:   1,
-			CategoryName: "go",
-			Type:         0,
-		},
-	}
-	var hr = &models.HomeResponse{
-		Viewer:    *settings.Conf.Viewer,
-		Categorys: categorys,
-		Posts:     posts,
-		Total:     1,
-		Page:      1,
-		Pages:     []int{1},
-		PageEnd:   true,
-	}
+	pageSize := 10
+	// 2.获取数据
+	hr := logic.GetIndexInfo(page, pageSize)
+	// 3.返回响应
 	c.HTML(http.StatusOK, "index.html", hr)
 }

@@ -77,6 +77,7 @@ func Init() (err error) {
 		return
 	}
 	//fmt.Printf("%#v, %#v", Conf.Viewer, Conf.SystemConfig)
+	//fmt.Println(Conf.Viewer)
 	viper.WatchConfig()
 	viper.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("配置文件修改了")
