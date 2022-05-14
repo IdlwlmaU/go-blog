@@ -44,7 +44,7 @@ type Viewer struct {
 	Bilibili    string   `mapstructure:"bilibili"`
 	Zhihu       string   `mapstructure:"zhihu"`
 	Avatar      string   `mapstructure:"avatar"`
-	UserName    string   `mapstructure:"user_name""`
+	UserName    string   `mapstructure:"user_name"`
 	UserDesc    string   `mapstructure:"user_desc"`
 }
 type SystemConfig struct {
@@ -76,7 +76,7 @@ func Init() (err error) {
 		fmt.Println("viper.Unmarshal failed, err:", err)
 		return
 	}
-	fmt.Printf("%#v, %#v", Conf.Viewer, Conf.SystemConfig)
+	//fmt.Printf("%#v, %#v", Conf.Viewer, Conf.SystemConfig)
 	viper.WatchConfig()
 	viper.OnConfigChange(func(in fsnotify.Event) {
 		fmt.Println("配置文件修改了")
