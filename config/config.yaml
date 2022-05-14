@@ -1,0 +1,40 @@
+name: "go-blog"
+mode: "dev"
+port: 8082
+version: "v0.0.1"
+
+log:
+  level: "debug"
+  filename: "go-blog.log"
+  max_size: 200
+  max_age: 30
+  max_backups: 7
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "123456"
+  dbname: "sql_demo"
+  max_open_conns: 200
+  max_idle_conns: 50
+
+viewer:
+  title : "go-blog"
+  description : "dema的go博客"
+  logo : "/resource/images/logo.jpeg"
+  navigation : ["首页","/", "GO语言","/golang", "归档","/pigeonhole", "关于","/about"]
+  bilibili : "https://space.bilibili.com/402459082"
+  zhihu : "https://www.zhihu.com/people/ola-61-58"
+  avatar : "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F025effec86692d7e3e489ac0496351723c79af93.png&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto"
+  user_name : "dema"
+  user_desc : "a gopher"
+
+system:
+  cdn_url : "https://static.mszlu.com/goblog/es6/md-assets"
+  qiniu_accessKey : "替换自己的"
+  qiniu_secretKey : "替换自己的"
+  valine : true
+  valine_app_id : "替换自己的"
+  valine_app_key : "替换自己的"
+  valine_server_url : "替换自己的"
