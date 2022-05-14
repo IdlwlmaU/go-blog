@@ -18,3 +18,11 @@ func ResponseSuccess(c *gin.Context, data interface{}) {
 		Data:  data,
 	})
 }
+
+func ResponseError(c *gin.Context, err error) {
+	c.JSON(http.StatusOK, &Result{
+		Code:  400,
+		Error: err.Error(),
+		Data:  nil,
+	})
+}

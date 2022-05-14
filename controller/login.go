@@ -23,12 +23,8 @@ func LoginHandler(c *gin.Context) {
 	}
 	data, err := logic.Login(params.UserName, params.Passwd)
 	if err != nil {
-		c.JSON(http.StatusOK, &models.Result{
-			Error: err.Error(),
-			Data:  nil,
-			Code:  -999,
-		})
+		models.ResponseError(c, err)
 		return
 	}
-	models.ResponseSuccess(c, *data)
+	models.ResponseSuccess(c, data)
 }

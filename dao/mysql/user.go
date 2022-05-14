@@ -18,11 +18,10 @@ func GetUserNameById(id int) (name string, err error) {
 
 func GetUser(userName, password string) (user *models.User, err error) {
 	user = new(models.User)
-	sqlStr := `select * from blog_user where user_name = ? and passwd = ? limit 1`
+	sqlStr := `select uid, user_name, passwd, avatar, create_at, update_at 
+				from blog_user
+				where user_name = ? and passwd = ? 
+				limit 1`
 	err = db.Get(user, sqlStr, userName, password)
-	if err == sql.ErrNoRows {
-		zap.L().Warn("there is no user in db")
-		err = nil
-	}
 	return
 }
