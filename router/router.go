@@ -20,5 +20,10 @@ func SetUpRouter() *gin.Engine {
 	r.GET("/", controller.IndexHandler)
 
 	r.GET("/c/:cId", controller.CategoryHandler)
+
+	r.GET("/login", controller.LoginIndexHandler)
+
+	r.POST("/api/v1/login", controller.LoginHandler)
+
 	return r
 }
