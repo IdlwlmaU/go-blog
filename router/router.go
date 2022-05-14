@@ -15,13 +15,7 @@ func SetUpRouter() *gin.Engine {
 	// 对应模板中的函数
 	r.SetFuncMap(template.FuncMap{"isODD": IsODD, "getNextName": GetNextName, "date": Date, "dateDay": DateDay})
 	// 告诉gin框架去哪个文件夹去找模板文件
-	home := "template/home.html"
-	footer := "template/layout/footer.html"
-	header := "template/layout/header.html"
-	personal := "template/layout/personal.html"
-	postList := "template/layout/post-list.html"
-	pagination := "template/layout/pagination.html"
-	r.LoadHTMLFiles("template/index.html", home, footer, header, personal, postList, pagination)
+	r.LoadHTMLGlob("./template/*")
 	r.GET("/", controller.IndexHandler)
 	return r
 }
