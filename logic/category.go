@@ -8,28 +8,28 @@ import (
 	"html/template"
 )
 
-func GetPostByCategoryId(cId, page, pageSize int) models.CategoryResponse {
+func GetPostByCategoryId(cId, page, pageSize int) *models.CategoryResponse {
 	category, err := mysql.GetAllCategory()
 	if err != nil {
 		zap.L().Error("mysql.GetAllCategory() failed, err:", zap.Error(err))
-		panic(err)
+		return nil
 	}
 	posts, err := mysql.GetPostPageByCategoryId(cId, page, pageSize)
 	if err != nil {
 		zap.L().Error("mysql.GetAllPosts() failed, err:", zap.Error(err))
-		panic(err)
+		return nil
 	}
 	var postMores []models.PostMore
 	for _, post := range posts {
 		categoryName, err := mysql.GetCategoryNameById(post.CategoryId)
 		if err != nil {
 			zap.L().Error("mysql.GetCategoryNameById() failed, err:", zap.Error(err))
-			panic(err)
+			return nil
 		}
 		userName, err := mysql.GetUserNameById(post.UserId)
 		if err != nil {
 			zap.L().Error("mysql.GetUserNameById() failed, err:", zap.Error(err))
-			panic(err)
+			return nil
 		}
 		content := []rune(post.Content)
 		if len(content) > 100 {
@@ -55,7 +55,7 @@ func GetPostByCategoryId(cId, page, pageSize int) models.CategoryResponse {
 	total, err := mysql.GetAllPostCountById(cId)
 	if err != nil {
 		zap.L().Error("mysql.GetAllPostCountById() failed, err:", zap.Error(err))
-		panic(err)
+		return nil
 	}
 	pageCount := (total-1)/pageSize + 1
 	pages := make([]int, 0)
@@ -76,7 +76,7 @@ func GetPostByCategoryId(cId, page, pageSize int) models.CategoryResponse {
 		zap.L().Error("mysql.GetCategoryNameById() failed, err:", zap.Error(err))
 		panic(err)
 	}
-	var res = models.CategoryResponse{
+	var res = &models.CategoryResponse{
 		HomeResponse: hr,
 		CategoryName: categoryName,
 	}

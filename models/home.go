@@ -5,7 +5,7 @@ import (
 )
 
 type HomeResponse struct {
-	*settings.Viewer
+	settings.Viewer
 	Categorys []Category
 	Posts     []PostMore
 	Total     int

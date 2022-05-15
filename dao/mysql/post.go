@@ -51,3 +51,14 @@ func GetAllPostCountById(cId int) (counts int, err error) {
 	}
 	return
 }
+
+func GetPostDetailById(pId int) (res *models.Post, err error) {
+	res = new(models.Post)
+	sqlStr := `select * from blog_post where pid = ?`
+	err = db.Get(res, sqlStr, pId)
+	if err == sql.ErrNoRows {
+		zap.L().Warn("there is no post data in db")
+		err = nil
+	}
+	return
+}
